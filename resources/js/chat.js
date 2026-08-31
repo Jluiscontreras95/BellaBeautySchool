@@ -40,6 +40,35 @@ const renderText = (text) => text
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\n/g, '<br>');
 
+const renderMarkdown = (text) => {
+    const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const lines = escaped.split('\n');
+    let html = '';
+    let inList = false;
+    const mdInline = (s) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*(?!\*)(.+?)\*(?!\*)/g, '$1<em>$2</em>');
+    for (const raw of lines) {
+        const trimmed = raw.trim();
+        if (trimmed.startsWith('- ')) {
+            const content = mdInline(trimmed.slice(2).trim());
+            if (!inList) { html += '<ul class="chat-md-list">'; inList = true; }
+            html += `<li>${content}</li>`;
+        } else if (trimmed.startsWith('• ')) {
+            const content = mdInline(trimmed.slice(2).trim());
+            if (!inList) { html += '<ul class="chat-md-list">'; inList = true; }
+            html += `<li>${content}</li>`;
+        } else {
+            if (inList) { html += '</ul>'; inList = false; }
+            if (trimmed === '') {
+                html += '<div style="height:6px"></div>';
+            } else {
+                html += `<p class="chat-md-p">${mdInline(raw)}</p>`;
+            }
+        }
+    }
+    if (inList) html += '</ul>';
+    return html;
+};
+
 const addMessage = (role, content) => {
     const el = document.createElement('div');
     el.className = `chat-message ${role}`;
@@ -101,6 +130,7 @@ const send = async (message) => {
         setTyping(false);
         const assistantEl = addMessage('assistant', '');
         const bubble = assistantEl.querySelector('.chat-bubble');
+        let fullText = '';
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
@@ -117,7 +147,8 @@ const send = async (message) => {
                     try {
                         const event = JSON.parse(payload);
                         if (event.type === 'text_delta' && event.delta) {
-                            bubble.innerHTML += renderText(event.delta);
+                            fullText += event.delta;
+                            bubble.innerHTML = renderMarkdown(fullText);
                             body.scrollTo({ top: body.scrollHeight });
                         }
                     } catch {

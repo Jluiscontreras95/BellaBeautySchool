@@ -28,7 +28,7 @@
     "src": "_instrument-sans-600-normal-B9e8oLYv.woff"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CsS5Tx3N.css",
+    "file": "assets/app-BqzsVRzW.css",
     "name": "app",
     "names": [
       "app.css"
@@ -43,7 +43,7 @@
     "isEntry": true
   },
   "resources/js/chat.js": {
-    "file": "assets/chat-B_6fwrD-.js",
+    "file": "assets/chat-BWqYriPV.js",
     "name": "chat",
     "src": "resources/js/chat.js",
     "isEntry": true

@@ -1453,6 +1453,34 @@ body.menu-open .chat-widget {
 }
 .chat-bubble strong {
     color: #8a5f23;
+    font-weight: 700;
+}
+.chat-bubble .chat-md-list {
+    margin: 8px 0 6px 4px;
+    padding-left: 18px;
+    list-style: disc;
+}
+.chat-bubble .chat-md-list li {
+    margin: 5px 0;
+    line-height: 1.5;
+    color: #3a2c1c;
+}
+.chat-bubble .chat-md-list li strong {
+    color: #5a3e1a;
+}
+.chat-bubble .chat-md-p {
+    margin: 7px 0;
+    line-height: 1.55;
+}
+.chat-bubble .chat-md-p:first-child {
+    margin-top: 0;
+}
+.chat-bubble .chat-md-p:last-child {
+    margin-bottom: 0;
+}
+.chat-bubble em {
+    font-style: italic;
+    color: #6b563c;
 }
 .chat-typing .chat-bubble {
     display: flex;
