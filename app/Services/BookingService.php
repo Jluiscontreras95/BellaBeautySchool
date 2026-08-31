@@ -5,8 +5,12 @@ namespace App\Services;
 use App\Models\Appointment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use App\Mail\AppointmentAdminMail;
+use App\Mail\AppointmentClientMail;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -200,11 +204,31 @@ class BookingService
                 });
             });
 
+            $this->sendNotifications($appointment);
+
             return $appointment;
         } catch (Throwable $throwable) {
             throw $throwable;
         } finally {
             $lock->release();
+        }
+    }
+
+    protected function sendNotifications(Appointment $appointment): void
+    {
+        try {
+            Mail::to($appointment->email)->send(new AppointmentClientMail($appointment));
+        } catch (Throwable $e) {
+            Log::warning('No se pudo enviar correo al cliente: ' . $e->getMessage(), ['appointment' => $appointment->id]);
+        }
+
+        $adminEmail = env('ADMIN_EMAIL') ?: config('mail.admin_address') ?: 'edicsonr1993@gmail.com';
+        if ($adminEmail && filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+            try {
+                Mail::to($adminEmail)->send(new AppointmentAdminMail($appointment));
+            } catch (Throwable $e) {
+                Log::warning('No se pudo enviar correo al admin: ' . $e->getMessage(), ['appointment' => $appointment->id]);
+            }
         }
     }
 
