@@ -174,23 +174,35 @@ revealEls.forEach((el, i) => {
     el.classList.add('reveal');
     if (i % 3 === 1) el.classList.add('reveal-delay-1');
     if (i % 3 === 2) el.classList.add('reveal-delay-2');
+    // Evita parpadeo: fuerza reflow antes de observar
+    void el.offsetWidth;
 });
 const revealObserver = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                requestAnimationFrame(() => entry.target.classList.add('visible'));
                 revealObserver.unobserve(entry.target);
             }
         });
     },
-    { threshold: 0.14, rootMargin: '0px 0px -40px 0px' },
+    { threshold: 0.12, rootMargin: '0px 0px -60px 0px' },
 );
-revealEls.forEach((el) => revealObserver.observe(el));
-
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealEls.forEach((el) => revealObserver.observe(el));
+} else {
     revealEls.forEach((el) => el.classList.add('visible'));
 }
+// Fallback: si por cualquier motivo no se observa, muestra todo tras 1.2s
+setTimeout(() => {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        revealEls.forEach((el) => {
+            if (!el.classList.contains('visible') && el.getBoundingClientRect().top < window.innerHeight * 1.2) {
+                el.classList.add('visible');
+            }
+        });
+    }
+}, 1200);
 
 dateInput?.addEventListener('change', loadAvailability);
 document.querySelectorAll('.step-next').forEach((button) => button.addEventListener('click', async () => {

@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="BELA Beauty Studio: academia, studio y comunidad para tu futuro profesional.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>BELA Beauty Studio</title>
+    <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+    <style>html.js .reveal,html.js .reveal-up,html.js .reveal-left,html.js .reveal-scale{opacity:0}html.js .reveal{transform:translateY(28px)}html.js .reveal-left{transform:translateX(-28px)}html.js .reveal-scale{transform:scale(.96)}</style>
     @vite(['resources/css/app.css','resources/js/app.js','resources/js/chat.js'])
 </head>
 <body>
