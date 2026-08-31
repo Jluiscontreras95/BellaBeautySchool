@@ -127,14 +127,22 @@ const send = async (message) => {
             throw new Error('No se pudo conectar con la asistente.');
         }
 
-        setTyping(false);
-        const assistantEl = addMessage('assistant', '');
-        const bubble = assistantEl.querySelector('.chat-bubble');
+        let assistantEl = null;
+        let bubble = null;
         let fullText = '';
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
+
+        const ensureBubble = () => {
+            if (!assistantEl) {
+                setTyping(false);
+                assistantEl = addMessage('assistant', '');
+                bubble = assistantEl.querySelector('.chat-bubble');
+                bubble.innerHTML = '';
+            }
+        };
 
         const flush = () => {
             const blocks = buffer.split('\n\n');
@@ -147,6 +155,7 @@ const send = async (message) => {
                     try {
                         const event = JSON.parse(payload);
                         if (event.type === 'text_delta' && event.delta) {
+                            ensureBubble();
                             fullText += event.delta;
                             bubble.innerHTML = renderMarkdown(fullText);
                             body.scrollTo({ top: body.scrollHeight });
@@ -167,8 +176,13 @@ const send = async (message) => {
         buffer += decoder.decode();
         flush();
 
-        if (!bubble.textContent.trim()) {
-            bubble.textContent = 'No recibí respuesta. Inténtalo de nuevo.';
+        if (!assistantEl || !bubble || !bubble.textContent.trim()) {
+            setTyping(false);
+            if (!assistantEl) {
+                addMessage('assistant', 'No recibí respuesta. Inténtalo de nuevo.');
+            } else {
+                bubble.textContent = 'No recibí respuesta. Inténtalo de nuevo.';
+            }
         }
     } catch (error) {
         setTyping(false);
