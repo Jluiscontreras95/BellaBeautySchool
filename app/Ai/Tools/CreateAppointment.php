@@ -18,7 +18,7 @@ class CreateAppointment implements Tool
 
     public function description(): Stringable|string
     {
-        return 'Crea una reserva de visita guiada en BELA Beauty Studio con los datos del usuario. Requiere nombre, email, teléfono, interés y fecha (YYYY-MM-DD) + hora (HH:MM). Antes de crear la cita, valida la disponibilidad con la herramienta de disponibilidad. Devuelve el código de confirmación o un error claro si el horario ya está ocupado.';
+        return 'Crea una reserva de visita guiada en BELA Beauty Studio con los datos del usuario. Requiere nombre, email, teléfono, interés, mensaje y fecha (YYYY-MM-DD) + hora (HH:MM) — todos obligatorios. Antes de crear la cita, valida la disponibilidad con la herramienta de disponibilidad. Devuelve el código de confirmación o un error claro si el horario ya está ocupado.';
     }
 
     public function handle(Request $request): Stringable|string
@@ -62,7 +62,7 @@ class CreateAppointment implements Tool
             'interest' => $schema->string()->description('Interés de la visita (ej. Programa de Manicurista, Cursos intensivos, Conocer el Studio).')->required(),
             'preferred_date' => $schema->string()->description('Fecha en formato YYYY-MM-DD (lunes a viernes).')->required(),
             'preferred_time' => $schema->string()->description('Hora en formato HH:MM dentro del horario de atención (09:00 a 20:00).')->required(),
-            'message' => $schema->string()->description('Mensaje o comentario opcional.'),
+            'message' => $schema->string()->description('Mensaje o comentario del interesado (obligatorio).')->required(),
         ];
     }
 }

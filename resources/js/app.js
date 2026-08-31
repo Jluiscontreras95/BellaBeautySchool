@@ -171,11 +171,8 @@ const revealEls = document.querySelectorAll(
     '.after-hero-heading, .after-hero-grid article, .after-hero-cta, .program-detail .detail-copy, .detail-visual, .studio-section > div, .community-section > div, .community-collage, .products-heading, .product-cards article, .suites-section > div, .suites-section img, .stories-heading, .stories-list article, .faq-section > div, .faq-list details, .site-footer > div',
 );
 revealEls.forEach((el, i) => {
-    el.classList.add('reveal');
     if (i % 3 === 1) el.classList.add('reveal-delay-1');
     if (i % 3 === 2) el.classList.add('reveal-delay-2');
-    // Evita parpadeo: fuerza reflow antes de observar
-    void el.offsetWidth;
 });
 const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -190,19 +187,19 @@ const revealObserver = new IntersectionObserver(
 );
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealEls.forEach((el) => revealObserver.observe(el));
+    // Muestra inmediatamente los que ya están en viewport al cargar
+    requestAnimationFrame(() => {
+        revealEls.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+                el.classList.add('visible');
+                revealObserver.unobserve(el);
+            }
+        });
+    });
 } else {
     revealEls.forEach((el) => el.classList.add('visible'));
 }
-// Fallback: si por cualquier motivo no se observa, muestra todo tras 1.2s
-setTimeout(() => {
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        revealEls.forEach((el) => {
-            if (!el.classList.contains('visible') && el.getBoundingClientRect().top < window.innerHeight * 1.2) {
-                el.classList.add('visible');
-            }
-        });
-    }
-}, 1200);
 
 dateInput?.addEventListener('change', loadAvailability);
 document.querySelectorAll('.step-next').forEach((button) => button.addEventListener('click', async () => {

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>BELA Beauty Studio</title>
     <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
-    <style>html.js .reveal,html.js .reveal-up,html.js .reveal-left,html.js .reveal-scale{opacity:0}html.js .reveal{transform:translateY(28px)}html.js .reveal-left{transform:translateX(-28px)}html.js .reveal-scale{transform:scale(.96)}</style>
+    <style>html.js .after-hero-heading,html.js .after-hero-grid article,html.js .after-hero-cta,html.js .program-detail .detail-copy,html.js .detail-visual,html.js .studio-section > div,html.js .community-section > div,html.js .community-collage,html.js .products-heading,html.js .product-cards article,html.js .suites-section > div,html.js .suites-section img,html.js .stories-heading,html.js .stories-list article,html.js .faq-section > div,html.js .faq-list details,html.js .site-footer > div{opacity:0;transform:translateY(28px)}html.js .reveal,html.js .reveal-up,html.js .reveal-left,html.js .reveal-scale{opacity:0}html.js .reveal{transform:translateY(28px)}html.js .reveal-left{transform:translateX(-28px)}html.js .reveal-scale{transform:scale(.96)}html.js .after-hero-heading.visible,html.js .after-hero-grid article.visible,html.js .after-hero-cta.visible,html.js .program-detail .detail-copy.visible,html.js .detail-visual.visible,html.js .studio-section > div.visible,html.js .community-section > div.visible,html.js .community-collage.visible,html.js .products-heading.visible,html.js .product-cards article.visible,html.js .suites-section > div.visible,html.js .suites-section img.visible,html.js .stories-heading.visible,html.js .stories-list article.visible,html.js .faq-section > div.visible,html.js .faq-list details.visible,html.js .site-footer > div.visible,html.js .reveal.visible,html.js .reveal-up.visible,html.js .reveal-left.visible,html.js .reveal-scale.visible{opacity:1;transform:none;transition:opacity 0.75s cubic-bezier(0.2,0.8,0.2,1),transform 0.75s cubic-bezier(0.2,0.8,0.2,1)}.no-js .after-hero-heading,.no-js .after-hero-grid article,.no-js .after-hero-cta,.no-js .program-detail .detail-copy,.no-js .detail-visual,.no-js .studio-section > div,.no-js .community-section > div,.no-js .community-collage,.no-js .products-heading,.no-js .product-cards article,.no-js .suites-section > div,.no-js .suites-section img,.no-js .stories-heading,.no-js .stories-list article,.no-js .faq-section > div,.no-js .faq-list details,.no-js .site-footer > div,.no-js .reveal,.no-js .reveal-left,.no-js .reveal-scale{opacity:1;transform:none}</style>
     @vite(['resources/css/app.css','resources/js/app.js','resources/js/chat.js'])
 </head>
 <body>
@@ -250,10 +250,9 @@
                     <p class="step-title">¿Cómo te contactamos?</p>
                     <div class="form-grid"><label>Nombre<input type="text" name="name" value="{{ old('name') }}"
                                 required></label><label>Teléfono<input type="tel" name="phone" value="{{ old('phone') }}"
-                                required></label></div><label>Email<input type="email" name="email"
-                            value="{{ old('email') }}" required></label><label>Cuéntanos algo más <span
-                            class="optional">(opcional)</span><textarea name="message" rows="3"
-                            placeholder="¿Qué te gustaría saber?"></textarea></label>
+                                required></label>                    </div><label>Email<input type="email" name="email"
+                            value="{{ old('email') }}" required></label><label>Cuéntanos algo más<textarea name="message" rows="3"
+                            placeholder="¿Qué te gustaría saber?" required></textarea></label>
                     <div class="step-actions"><button type="button" class="step-back">← ATRÁS</button><button
                             type="button" class="btn-primary step-next">REVISAR DATOS →</button></div>
                 </div>

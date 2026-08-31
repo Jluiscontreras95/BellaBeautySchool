@@ -22,8 +22,8 @@ class AppointmentController extends Controller
             'interest' => ['required', 'string', 'max:80'],
             'preferred_date' => ['required', 'date', 'after_or_equal:today'],
             'preferred_time' => ['required', 'in:'.implode(',', BookingService::slots())],
-            'message' => ['nullable', 'string', 'max:500'],
-            'consent' => ['accepted'],
+            'message' => ['required', 'string', 'max:500'],
+            'consent' => ['required', 'accepted'],
         ]);
 
         $validated['name'] = trim($validated['name']);
