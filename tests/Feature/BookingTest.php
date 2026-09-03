@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Mail\AppointmentAdminMail;
+use App\Mail\AppointmentClientMail;
 use App\Models\Appointment;
 use App\Services\BookingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -39,6 +42,23 @@ class BookingTest extends TestCase
         $this->assertNotNull($appointment->confirmation_code);
         $this->assertSame('10:00:00', $appointment->preferred_time);
         $this->assertSame(120, $appointment->duration_minutes);
+    }
+
+    public function test_an_appointment_sends_client_and_admin_notifications(): void
+    {
+        Mail::fake();
+
+        $appointment = app(BookingService::class)->create([
+            'name' => 'Ana Pérez',
+            'email' => 'ana@example.com',
+            'phone' => '3001234567',
+            'interest' => 'Programa de Manicurista',
+            'preferred_date' => $this->nextWeekday()->toDateString(),
+            'preferred_time' => '10:00',
+        ]);
+
+        Mail::assertSent(AppointmentClientMail::class, fn (AppointmentClientMail $mail): bool => $mail->appointment->is($appointment) && $mail->hasTo('ana@example.com'));
+        Mail::assertSent(AppointmentAdminMail::class, fn (AppointmentAdminMail $mail): bool => $mail->appointment->is($appointment) && $mail->hasTo('edicsonr1993@gmail.com'));
     }
 
     public function test_back_to_back_appointments_do_not_overlap(): void

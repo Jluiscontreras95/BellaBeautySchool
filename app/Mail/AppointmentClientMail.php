@@ -18,7 +18,7 @@ class AppointmentClientMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu visita a BELA Beauty Studio — ' . $this->appointment->confirmation_code,
+            subject: 'Tu visita a BELA Beauty Studio — '.$this->appointment->confirmation_code,
         );
     }
 

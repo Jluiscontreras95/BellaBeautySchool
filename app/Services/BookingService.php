@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
+use App\Mail\AppointmentAdminMail;
+use App\Mail\AppointmentClientMail;
 use App\Models\Appointment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use App\Mail\AppointmentAdminMail;
-use App\Mail\AppointmentClientMail;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -219,7 +219,7 @@ class BookingService
         try {
             Mail::to($appointment->email)->send(new AppointmentClientMail($appointment));
         } catch (Throwable $e) {
-            Log::warning('No se pudo enviar correo al cliente: ' . $e->getMessage(), ['appointment' => $appointment->id]);
+            Log::warning('No se pudo enviar correo al cliente: '.$e->getMessage(), ['appointment' => $appointment->id]);
         }
 
         $adminEmail = env('ADMIN_EMAIL') ?: config('mail.admin_address') ?: 'edicsonr1993@gmail.com';
@@ -227,7 +227,7 @@ class BookingService
             try {
                 Mail::to($adminEmail)->send(new AppointmentAdminMail($appointment));
             } catch (Throwable $e) {
-                Log::warning('No se pudo enviar correo al admin: ' . $e->getMessage(), ['appointment' => $appointment->id]);
+                Log::warning('No se pudo enviar correo al admin: '.$e->getMessage(), ['appointment' => $appointment->id]);
             }
         }
     }

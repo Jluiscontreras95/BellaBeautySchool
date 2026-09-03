@@ -18,7 +18,7 @@ class AppointmentAdminMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Nueva reserva BELA — ' . $this->appointment->name . ' · ' . $this->appointment->confirmation_code,
+            subject: 'Nueva reserva BELA — '.$this->appointment->name.' · '.$this->appointment->confirmation_code,
         );
     }
 
