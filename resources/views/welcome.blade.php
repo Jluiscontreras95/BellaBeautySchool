@@ -3,12 +3,68 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="BELA Beauty Studio: academia, studio y comunidad para tu futuro profesional.">
+    <meta name="description" content="BELA Beauty Studio: formación profesional en belleza, studio, comunidad y espacios para construir tu futuro.">
+    <meta name="author" content="BELA Beauty Studio">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0a0806">
+    <link rel="canonical" href="{{ route('home') }}">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BELA Beauty Studio">
+    <meta property="og:title" content="BELA Beauty Studio | Formación profesional en belleza">
+    <meta property="og:description" content="Aprende, certifícate, trabaja, emprende y crece dentro de BELA Beauty Studio.">
+    <meta property="og:url" content="{{ route('home') }}">
+    <meta property="og:image" content="{{ asset('media/bela-poster.jpg') }}">
+    <meta property="og:image:secure_url" content="{{ asset('media/bela-poster.jpg') }}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="720">
+    <meta property="og:image:alt" content="BELA Beauty Studio y su ecosistema de belleza profesional">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BELA Beauty Studio | Formación profesional en belleza">
+    <meta name="twitter:description" content="Formación profesional, studio, comunidad y Beauty Suites para tu futuro en belleza.">
+    <meta name="twitter:image" content="{{ asset('media/bela-poster.jpg') }}">
+    <meta name="twitter:image:alt" content="BELA Beauty Studio y su ecosistema de belleza profesional">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>BELA Beauty Studio</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B61SDGRV68"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B61SDGRV68');
+    </script>
     <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
     <style>html.js .after-hero-heading,html.js .after-hero-grid article,html.js .after-hero-cta,html.js .program-detail .detail-copy,html.js .detail-visual,html.js .studio-section > div,html.js .community-section > div,html.js .community-collage,html.js .products-heading,html.js .product-cards article,html.js .suites-section > div,html.js .suites-section img,html.js .stories-heading,html.js .stories-list article,html.js .faq-section > div,html.js .faq-list details,html.js .site-footer > div{opacity:0;transform:translateY(28px)}html.js .reveal,html.js .reveal-up,html.js .reveal-left,html.js .reveal-scale{opacity:0}html.js .reveal{transform:translateY(28px)}html.js .reveal-left{transform:translateX(-28px)}html.js .reveal-scale{transform:scale(.96)}html.js .after-hero-heading.visible,html.js .after-hero-grid article.visible,html.js .after-hero-cta.visible,html.js .program-detail .detail-copy.visible,html.js .detail-visual.visible,html.js .studio-section > div.visible,html.js .community-section > div.visible,html.js .community-collage.visible,html.js .products-heading.visible,html.js .product-cards article.visible,html.js .suites-section > div.visible,html.js .suites-section img.visible,html.js .stories-heading.visible,html.js .stories-list article.visible,html.js .faq-section > div.visible,html.js .faq-list details.visible,html.js .site-footer > div.visible,html.js .reveal.visible,html.js .reveal-up.visible,html.js .reveal-left.visible,html.js .reveal-scale.visible{opacity:1;transform:none;transition:opacity 0.75s cubic-bezier(0.2,0.8,0.2,1),transform 0.75s cubic-bezier(0.2,0.8,0.2,1)}.no-js .after-hero-heading,.no-js .after-hero-grid article,.no-js .after-hero-cta,.no-js .program-detail .detail-copy,.no-js .detail-visual,.no-js .studio-section > div,.no-js .community-section > div,.no-js .community-collage,.no-js .products-heading,.no-js .product-cards article,.no-js .suites-section > div,.no-js .suites-section img,.no-js .stories-heading,.no-js .stories-list article,.no-js .faq-section > div,.no-js .faq-list details,.no-js .site-footer > div,.no-js .reveal,.no-js .reveal-left,.no-js .reveal-scale{opacity:1;transform:none}</style>
     @vite(['resources/css/app.css','resources/js/app.js','resources/js/chat.js'])
+    <script type="application/ld+json">
+        {
+            "@@context": "https://schema.org",
+            "@@type": "EducationalOrganization",
+            "name": "BELA Beauty Studio",
+            "url": "{{ route('home') }}",
+            "logo": "{{ asset('media/bela-logo.png') }}",
+            "image": "{{ asset('media/bela-poster.jpg') }}",
+            "description": "Academia y comunidad de belleza con formación profesional, studio y Beauty Suites.",
+            "email": "hola@bela.beauty",
+            "hasOfferCatalog": {
+            "@@type": "OfferCatalog",
+                "name": "Formación y espacios BELA",
+                "itemListElement": [
+                    {
+                        "@@type": "Course",
+                        "name": "Programa de Manicurista",
+                        "description": "Programa profesional de 600 horas con 12 módulos y acompañamiento personalizado."
+                    },
+                    {
+                        "@@type": "Service",
+                        "name": "Visita guiada a BELA",
+                        "description": "Conoce las aulas, el Studio y la comunidad BELA."
+                    }
+                ]
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="landing-wrapper" id="inicio">
