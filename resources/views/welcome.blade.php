@@ -11,22 +11,23 @@
     <meta property="og:locale" content="es_ES">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BELA Beauty Studio">
-    <meta property="og:title" content="BELA Beauty Studio | Formación profesional en belleza">
+    <meta property="og:title" content="BELA Beauty Studio | Academia de belleza profesional">
     <meta property="og:description" content="Aprende, certifícate, trabaja, emprende y crece dentro de BELA Beauty Studio.">
     <meta property="og:url" content="{{ route('home') }}">
-    <meta property="og:image" content="{{ asset('media/bela-poster.jpg') }}">
-    <meta property="og:image:secure_url" content="{{ asset('media/bela-poster.jpg') }}">
+    <meta property="og:image" content="{{ asset('media/bela-og.jpg') }}">
+    <meta property="og:image:url" content="{{ asset('media/bela-og.jpg') }}">
+    <meta property="og:image:secure_url" content="{{ asset('media/bela-og.jpg') }}">
     <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1280">
-    <meta property="og:image:height" content="720">
-    <meta property="og:image:alt" content="BELA Beauty Studio y su ecosistema de belleza profesional">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Formación profesional en belleza en BELA Beauty Studio. Reserva tu visita.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BELA Beauty Studio | Formación profesional en belleza">
+    <meta name="twitter:title" content="BELA Beauty Studio | Academia de belleza profesional">
     <meta name="twitter:description" content="Formación profesional, studio, comunidad y Beauty Suites para tu futuro en belleza.">
-    <meta name="twitter:image" content="{{ asset('media/bela-poster.jpg') }}">
-    <meta name="twitter:image:alt" content="BELA Beauty Studio y su ecosistema de belleza profesional">
+    <meta name="twitter:image" content="{{ asset('media/bela-og.jpg') }}">
+    <meta name="twitter:image:alt" content="Formación profesional en belleza en BELA Beauty Studio. Reserva tu visita.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>BELA Beauty Studio</title>
+    <title>BELA Beauty Studio | Academia de belleza profesional</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B61SDGRV68"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
